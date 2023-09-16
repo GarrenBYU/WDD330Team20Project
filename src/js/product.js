@@ -4,9 +4,9 @@ import ProductData from "./ProductData.mjs";
 const dataSource = new ProductData("tents");
 
 function addProductToCart(product) {
-  let oldContent = getLocalStorage("so-cart");
-  if (oldContent) {
-    setLocalStorage("so-cart", [...oldContent, product]);
+  let oldCartContent = getLocalStorage("so-cart");
+  if (oldCartContent) {
+    setLocalStorage("so-cart", [...oldCartContent, product]);
   } else {
     setLocalStorage("so-cart", [product]);
   }
