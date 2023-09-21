@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage} from "./utils.mjs";
+import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 
 function productDetailsTemplate(product) {
   return `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
@@ -35,21 +35,21 @@ export default class ProductDetails {
   }
 
   addToCart() {
-   // setLocalStorage("so-cart", [this.product]);
-    let oldCartContent = getLocalStorage("so-cart");
-    if (oldCartContent) {
-      setLocalStorage("so-cart", [...oldCartContent, this.product]);
-    } else {
-      setLocalStorage("so-cart", [this.product]);
+    setLocalStorage("so-cart", this.product);
+    // let oldCartContent = getLocalStorage("so-cart");
+    // if (oldCartContent) {
+    //   setLocalStorage("so-cart", [...oldCartContent, this.product]);
+    // } else {
+    //   setLocalStorage("so-cart", [this.product]);
     }
-  }
+  //}
 
 
-  renderProductDetails(product) {
-    const element = document.querySelector("main");
+  renderProductDetails(selector) {
+    const element = document.querySelector(selector);
     
     element.insertAdjacentHTML("afterBegin", productDetailsTemplate(this.product));
-    console.log(element);
+    //console.log(element);
     
   }
 
@@ -58,7 +58,7 @@ export default class ProductDetails {
     this.product = await this.dataSource.findProductById(this.productId);
     // once we have the product details we can render out the HTML
     //console.log(this.product.Id);
-    this.renderProductDetails(this.product);
+    this.renderProductDetails("main");
     //this.renderProductDetails(this.product);
     // once the HTML is rendered we can add a listener to Add to Cart button
     // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
