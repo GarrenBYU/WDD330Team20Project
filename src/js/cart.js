@@ -26,3 +26,21 @@ function cartItemTemplate(item) {
 }
 
 renderCartContents();
+
+function renderTotal(){
+  const products = getLocalStorage('so-cart')
+  if(!products) return;
+  let sum = 0;
+  let total_holder = document.querySelector(".hide");
+  
+  for(const obj of products)
+  {
+    obj.FinalPrice ? sum += obj.FinalPrice : sum+=0;
+  }
+  
+  total_holder.style.display = "block";
+  total_holder.textContent = `Total: $${sum}`;
+}
+
+renderCartContents();
+renderTotal();

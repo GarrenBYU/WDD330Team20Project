@@ -47,7 +47,6 @@ export default class ProductDetails {
 
   renderProductDetails(product) {
     const element = document.querySelector("main");
-    
     element.insertAdjacentHTML("afterBegin", productDetailsTemplate(this.product));
     console.log(element);
     
@@ -65,7 +64,4 @@ export default class ProductDetails {
     document.getElementById('addToCart')
       .addEventListener('click', this.addToCart.bind(this));
     }
-
 }
-
-
