@@ -1,3 +1,5 @@
+import { renderListWithTemplate } from './utils.mjs';
+
 function productCardTemplate(product) {
     return `<li class="product-card">
         <a href="product_pages/index.html?product=${product.Id}">
@@ -23,11 +25,35 @@ export default class ProductList {
     }
 
     renderList(list){
-        const htmlStrings = list.map(productCardTemplate);
-        if (clear) {
-            parentElement.innerHTML = '';
-        }
-        this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
+        getOnlyOnesWithImages(list).then((fileteredTents) => {
+            renderListWithTemplate(productCardTemplate, this.listElement, fileteredTents);
+        })
+        
+        // const htmlStrings = list.map(productCardTemplate);
+        // if (clear) {
+        //     parentElement.innerHTML = '';
+        // }
+        // this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
         //renderListWithTemplate(productCardTemplate, this.listElement, list);
     }
+}
+
+async function getOnlyOnesWithImages(list) {
+    let realProducts = [];
+
+    async function checkFile(item) {
+        try{
+            const response = await fetch(item.Image);
+            if (response.ok) {
+                realProducts.push(item);
+            } else {
+                console.error('There is no such file: ', error);
+            }
+        }
+        catch(error) {
+            console.error('There has been an error when looking for the file ', error);
+        }
+    }
+    await Promise.all(list.map((item) => checkFile(item)));
+    return realProducts;
 }
