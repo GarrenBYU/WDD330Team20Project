@@ -43,8 +43,8 @@ export default class ProductDetails {
     //   setLocalStorage("so-cart", [...oldCartContent, this.product]);
     // } else {
     //   setLocalStorage("so-cart", [this.product]);
-    }
-  //}
+    // }
+  }
   // getData() {
   //   return fetch(this.path)
   //     .then(convertToJson)
