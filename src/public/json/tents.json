@@ -45,7 +45,6 @@
     "ListPrice": 199.99,
     "FinalPrice": 183.99,
     "PercentOff": "8%"
-
   },
   {
     "Id": "989CG",
@@ -69,7 +68,6 @@
     "ListPrice": 179.99,
     "FinalPrice": 165.59,
     "PercentOff": "8%"
-
   },
   {
     "Id": "985PR",
@@ -93,7 +91,6 @@
     "ListPrice": 349.99,
     "FinalPrice": 332.49,
     "PercentOff": "5%"
-
   },
   {
     "Id": "880RT",
@@ -117,7 +114,6 @@
     "ListPrice": 179.99,
     "FinalPrice": 161.99,
     "PercentOff": "10%"
-
   },
 
   {
@@ -143,6 +139,5 @@
     "ListPrice": 69.99,
     "FinalPrice": 55.99,
     "PercentOff": "20%"
-
   }
 ]
