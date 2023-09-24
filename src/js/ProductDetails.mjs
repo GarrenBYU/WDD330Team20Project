@@ -65,15 +65,15 @@ export default class ProductDetails {
     document.getElementById('addToCart')
       .addEventListener('click', this.addToCart.bind(this));
   }
-  addToCart() {
-    setLocalStorage("so-cart", this.product);
+  // addToCart() {
+  //   setLocalStorage("so-cart", this.product);
     // let oldCartContent = getLocalStorage("so-cart");
     // if (oldCartContent) {
     //   setLocalStorage("so-cart", [...oldCartContent, this.product]);
     // } else {
     //   setLocalStorage("so-cart", [this.product]);
     // }
-  }
+  // }
   // getData() {
   //   return fetch(this.path)
   //     .then(convertToJson)
