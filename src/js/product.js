@@ -1,6 +1,6 @@
-import { getLocalStorage, setLocalStorage, getParam } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, getParam } from './utils.mjs';
 import ProductDetails from './ProductDetails.mjs';
-import ProductData from "./ProductData.mjs";
+import ProductData from './ProductData.mjs';
 
 // Variables
 const dataSource = new ProductData('tents');
