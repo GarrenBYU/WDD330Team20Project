@@ -41,7 +41,38 @@ export async function renderListWithTemplate(templateFn, parentElement, list, po
   }
   
   if (clear) {
-    parentElement.innerHTML = '';
+    parentElement.textContent = '';
   }
-  parentElement.insertAdjacentHTML (position, htmlStrings.join(''));
+  // document.querySelector(parentElement).innerHTML = products.join("");
+}
+
+
+export function renderWithTemplate(templateFn, parentElement, data, callback){
+
+  parentElement.appendChild(templateFn);
+  if (callback) {
+    callback(data);
+  }
+  
+}
+export async function loadTemplate(path) {
+  const html = await fetch(path).then((res)=> res.text());
+
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  return template.content;
+}
+
+export async function loadHeaderFooter() {
+  let headerElement = document.querySelector("#header");
+  let footerElement = document.querySelector("#footer");
+
+  let templateHeaderHTML = await loadTemplate('../partials/header.html');
+  let templateFooterHTML =  await loadTemplate('../partials/footer.html');
+  console.log(templateHeaderHTML)
+  renderWithTemplate(templateHeaderHTML, headerElement);
+  renderWithTemplate(templateFooterHTML, footerElement);
+
+
+
 }
