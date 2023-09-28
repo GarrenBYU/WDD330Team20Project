@@ -28,7 +28,7 @@ export default class ProductListing {
     //renderListWithTemplate(productCardTemplate, this.target, filteredTents)
     // const products = list.map((item) => productCardTemplate(item));
     // console.log(products);
-    // document.querySelector(this.target).innerHTML = products.join("");
+
   }
 
   async init() {
