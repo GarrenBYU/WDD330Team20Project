@@ -30,19 +30,16 @@ export function getParam(param) {
   return product;
 }
 
-// export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
-//   const products = list.map((item) => templateFn(item));
-//   //console.log(products);
-//   parentElement.insertAdjacentHTML(position, products.join(''));
-//   if (clear) {
-//     parentElement.textContent = '';
-//   }
-//   //document.querySelector(parentElement).innerHTML = products.join("");
-// }
-
-
-export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false){
-  const htmlStrings = list.map(templateFn);
+export async function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  const products = await list.map((item) => templateFn(item));
+  console.log(products, parentElement, list);
+  try{
+    parentElement.insertAdjacentHTML(position, products.join(''));
+  }
+  catch{
+    
+  }
+  
   if (clear) {
     parentElement.innerHTML = '';
   }

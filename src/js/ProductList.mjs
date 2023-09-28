@@ -10,13 +10,24 @@ function productCardTemplate(product) {
     </a>
     </li>`
 }
+export default class ProductListing {
+    constructor(category, dataSource, target) {
+    this.category = category;
+    this.dataSource = dataSource;
+    this.target = target;
+  }
 
-export default class ProductList {
-    constructor(category, dataSource, listElement){
-        this.category = category;
-        this.dataSource = dataSource;
-        this.listElement = listElement;
-    }
+  renderList(list) {
+    getOnlyWithImage(list) // We are going to fetch everything we need first
+    .then((filteredTents) => {
+      renderListWithTemplate(productCardTemplate, this.target, filteredTents)
+    });
+    //console.log(actual_list);
+    //renderListWithTemplate(productCardTemplate, this.target, filteredTents)
+    // const products = list.map((item) => productCardTemplate(item));
+    // console.log(products);
+
+  }
 
     async init() {
         const list = await this.dataSource.getData();
