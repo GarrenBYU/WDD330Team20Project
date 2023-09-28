@@ -29,6 +29,7 @@ export default class ShoppingCard {
 
 renderBasket(){
   const items = getLocalStorage(this.key);
+  if(!items) return;
   const htmlElements = items.map((item)=>cartItemTemplate(item));
   document.querySelector(this.target).innerHTML = htmlElements.join("");
 }
@@ -36,7 +37,7 @@ renderBasket(){
 
 
 renderTotal(){
-  const products = getLocalStorage('so-cart')
+  const products = getLocalStorage(this.key)
   if(!products) return;
   let sum = 0;
   let total_holder = document.querySelector(".hide");
