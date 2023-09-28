@@ -34,7 +34,11 @@ export async function renderListWithTemplate(templateFn, parentElement, list, po
   
   const products =  await list.map((item) => templateFn(item));
   // REMOVED THIS COMMENT
-  parentElement.insertAdjacentHTML(position, products.join(''));
+  try {
+    parentElement.insertAdjacentHTML(position, products.join(''));
+  } catch {
+    
+  }
   if (clear) {
     parentElement.textContent = '';
   }
