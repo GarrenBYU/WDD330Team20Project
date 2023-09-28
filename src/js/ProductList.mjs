@@ -15,30 +15,42 @@ export default class ProductList {
     constructor(category, dataSource, listElement){
         this.category = category;
         this.dataSource = dataSource;
-        this.listElement = listElement;
+        this.target = listElement;
     }
 
+   
+
+    // renderList(list){
+    //     getOnlyOnesWithImages(list).then((fileteredTents) => {
+    //         renderListWithTemplate(productCardTemplate, this.listElement, fileteredTents);
+    //     })
+        
+    //     // const htmlStrings = list.map(productCardTemplate);
+    //     // if (clear) {
+    //     //     parentElement.innerHTML = '';
+    //     // }
+    //     // this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
+    //     //renderListWithTemplate(productCardTemplate, this.listElement, list);
+    // }
+
+    renderList(list) {
+        getOnlyWithImage(list) // We are going to fetch everything we need first
+        .then((filteredTents) => {
+          renderListWithTemplate(productCardTemplate, this.target, filteredTents)
+        });
+        //console.log(actual_list);
+        //renderListWithTemplate(productCardTemplate, this.target, filteredTents)
+        // const products = list.map((item) => productCardTemplate(item));
+        // console.log(products);
+        // document.querySelector(this.target).innerHTML = products.join("");
+    }
     async init() {
         const list = await this.dataSource.getData();
-
-        this.renderList(list);
-    }
-
-    renderList(list){
-        getOnlyOnesWithImages(list).then((fileteredTents) => {
-            renderListWithTemplate(productCardTemplate, this.listElement, fileteredTents);
-        })
-        
-        // const htmlStrings = list.map(productCardTemplate);
-        // if (clear) {
-        //     parentElement.innerHTML = '';
-        // }
-        // this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
-        //renderListWithTemplate(productCardTemplate, this.listElement, list);
+        this.renderList(list)
     }
 }
 
-async function getOnlyOnesWithImages(list) {
+async function getOnlyWithImage(list) {
     let realProducts = [];
 
     async function checkFile(item) {
@@ -47,7 +59,7 @@ async function getOnlyOnesWithImages(list) {
             if (response.ok) {
                 realProducts.push(item);
             } else {
-                console.error('There is no such file: ', error);
+                console.error('There is no such file: ', item.Image);
             }
         }
         catch(error) {
@@ -55,5 +67,6 @@ async function getOnlyOnesWithImages(list) {
         }
     }
     await Promise.all(list.map((item) => checkFile(item)));
+    console.log(realProducts)
     return realProducts;
 }
