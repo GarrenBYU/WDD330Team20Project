@@ -31,8 +31,9 @@ export function getParam(param) {
 }
 
 export async function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  document.querySelector("#category_name").textContent = list[0].Category[0].toUpperCase() + list[0].Category.slice(1)
   const products = await list.map((item) => templateFn(item));
-  console.log(products, parentElement, list);
+
   try{
     parentElement.insertAdjacentHTML(position, products.join(''));
   }
