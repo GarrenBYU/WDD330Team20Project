@@ -5,7 +5,7 @@ function productDetailsTemplate(product) {
     <h2 class="divider">${product.NameWithoutBrand}</h2>
     <img
       class="divider"
-      src="${product.Image}"
+      src="${product.Images.PrimaryLarge}"
       alt="${product.NameWithoutBrand}"
     />
     <p class="product-card__price">$${product.FinalPrice} - ${product.PercentOff} off!</p>
@@ -25,11 +25,13 @@ export default class ProductDetails {
     this.dataSource = dataSource;
   }
   getData() {
+    console.log("getData");
     return fetch(this.path)
       .then(convertToJson)
       .then((data) => data);
   }
   async findProductById(id) {
+    console.log("findProduct");
     const products = await this.getData();
     return products.find((item) => item.Id === id);
   }
@@ -46,6 +48,7 @@ export default class ProductDetails {
 
 
   renderProductDetails(product) {
+    console.log("renderProduct");
     const element = document.querySelector("main");
     
     element.insertAdjacentHTML("afterBegin", productDetailsTemplate(this.product));
@@ -54,6 +57,7 @@ export default class ProductDetails {
   }
 
   async init() {
+    console.log("init");
     // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
     this.product = await this.dataSource.findProductById(this.productId);
     // once we have the product details we can render out the HTML
