@@ -7,6 +7,7 @@ const shoppingCart = new ShoppingCart('so-cart', '.product-list');
 shoppingCart.renderBasket();
 shoppingCart.renderTotal();
 
+
 // function renderCartContents() {
 //   const cartItems = getLocalStorage("so-cart");
 
