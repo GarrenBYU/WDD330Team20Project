@@ -3,7 +3,7 @@ import { loadHeaderFooter } from "./utils.mjs";
 
 function cartItemTemplate(item) {
   const newItem = `<li class='cart-card divider'>
-  <button id ='${item.Id}' class="remove-btn" '>X</button>
+  
   <a href='#' class='cart-card__image'>
     <img
       src='${item.Images.PrimaryMedium}'
@@ -16,6 +16,7 @@ function cartItemTemplate(item) {
   <p class='cart-card__color'>${item.Colors[0].ColorName}</p>
   <p class='cart-card__quantity'>qty: 1</p>
   <p class='cart-card__price'>$${item.FinalPrice}</p>
+  <button id ='${item.Id}' class="remove-btn" '>X Remove item</button>
 </li>`;
 
   return newItem;
