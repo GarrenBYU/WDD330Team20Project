@@ -209,6 +209,11 @@ button {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
+.discount {
+  color: red;
+  background-color: yellow;
+  padding: 5px;
+}
 
 @media screen and (min-width: 500px) {
   body {
