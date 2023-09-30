@@ -125,6 +125,7 @@ button {
 .product-list {
   display: flex;
   flex-flow: row wrap;
+  gap: 20px;
   justify-content: space-between;
   list-style-type: none;
   padding: 0;
@@ -209,12 +210,12 @@ button {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
-.discount {
-  color: red;
-  background-color: yellow;
-  padding: 5px;
+.remove-btn {
+  grid-column: 2/3;
+  justify-self: left;
+  margin: 0;
+  margin-bottom: 20px;
 }
-
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
