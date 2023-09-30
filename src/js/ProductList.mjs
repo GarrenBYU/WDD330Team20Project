@@ -12,7 +12,7 @@ function productCardTemplate(product) {
             >
           </li>`
 }
-export default class ProductListing {
+export default class ProductList {
     constructor(category, dataSource, target) {
     this.category = category;
     this.dataSource = dataSource;
@@ -32,7 +32,9 @@ export default class ProductListing {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
+   
+    const list = this.dataSource;
+    // const list = await this.dataSource.getData();
     this.renderList(list)
   }
 }

@@ -224,3 +224,33 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.categories {
+  margin-top: 100px;
+}
+
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0 auto;
+}
+
+.category-list img {
+  width: 100px;
+  height: 100px;
+  /* margin: 50px; */
+}
+
+.category a{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.category h2 {
+  color: #303030;
+}
