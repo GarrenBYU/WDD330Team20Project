@@ -7,16 +7,18 @@ export default class CheckoutProcess {
       this.key = key;
       this.outputSelector = outputSelector;
       this.list = [];
-      this.itemTotal = 0;
-      this.subtotal = subtotal;
-      this.shipping = 0;
-      this.tax = 0;
-      this.orderTotal = 0;
+      this.itemTotal = Number(0);
+      this.subtotal = Number(subtotal);
+      this.shipping = Number(0);
+      this.tax = Number(0);
+      this.orderTotal = Number(0);
     }
   
     init() {
       this.list = getLocalStorage(this.key);
       this.itemTotal = this.calculateItemSummary(this.list);
+      this.calculateOrdertotal();
+      //console.log(this.list, this.itemTotal);
     }
   
     calculateItemSummary(products) {
@@ -32,17 +34,19 @@ export default class CheckoutProcess {
     calculateOrdertotal() {
       // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
       this.shipping = 10 + ((this.itemTotal - 1) * 2);
-      this.tax = Number(this.subtotal) * 0.06;
-      
+      this.tax = this.subtotal * 0.06;
+      this.orderTotal = this.subtotal + this.tax + this.shipping;
+
+      //console.log(this.list, this.itemTotal);
       // display the totals.
       this.displayOrderTotals();
     }
   
     displayOrderTotals() {
       // once the totals are all calculated display them in the order summary page
-      document.querySelector(".cart-total").textContent += Number(subtotal).toFixed(2);
-      document.querySelector(".shipping-estimate").textContent += shippingPrice.toFixed(2);
-      document.querySelector(".tax").textContent += tax.toFixed(2);
-      document.querySelector(".order-total").textContent += orderTotal.toFixed(2);
+      //document.querySelector(".cart-total").textContent += this.subtotal.toFixed(2);
+      document.querySelector(".shipping-estimate").textContent += this.shipping.toFixed(2);
+      document.querySelector(".tax").textContent += this.tax.toFixed(2);
+      document.querySelector(".order-total").textContent += this.orderTotal.toFixed(2);
     }
   }
