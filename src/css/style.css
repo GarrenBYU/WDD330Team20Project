@@ -222,6 +222,34 @@ button {
   color: red;
   font-weight: bold;
 }
+#checkoutMain {
+  display: flex;
+  gap: 40px;
+}
+#checkoutMain button {
+  margin-top: 40px;
+}
+fieldset {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  width: fit-content;
+  margin-top: 40px;
+  padding: 0px 30px 30px 30px;
+}
+input{
+  width: 400px;
+  padding: 10px;
+}
+label {
+  margin-top: 20px;
+}
+#orderSummary {
+  background-color: #e5eea6;
+  height: fit-content;
+  margin-top: 100px;
+  padding: 30px;
+}
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
