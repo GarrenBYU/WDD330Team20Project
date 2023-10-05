@@ -125,6 +125,7 @@ button {
 .product-list {
   display: flex;
   flex-flow: row wrap;
+  gap: 20px;
   justify-content: space-between;
   list-style-type: none;
   padding: 0;
@@ -205,7 +206,22 @@ button {
 .hide{
   display: none;
 }
-
+#categories {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.remove-btn {
+  grid-column: 2/3;
+  justify-self: left;
+  margin: 0;
+  margin-bottom: 20px;
+}
+.product-card__price s {
+  background-color: yellow;
+  padding: 10px;
+  color: red;
+  font-weight: bold;
+}
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

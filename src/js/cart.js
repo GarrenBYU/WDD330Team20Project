@@ -1,52 +1,59 @@
 import { getLocalStorage } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
+import ShoppingCart from "./ShoppingCart.mjs";
 
-function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
+loadHeaderFooter();
+const shoppingCart = new ShoppingCart('so-cart', '.product-list');
+shoppingCart.renderBasket();
+shoppingCart.renderTotal();
 
-  // fix for the empty cart error
-  if (cartItems != null) {
-    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    document.querySelector(".product-list").innerHTML = htmlItems.join("");
-  }
+// function renderCartContents() {
+//   const cartItems = getLocalStorage("so-cart");
+
+//   // fix for the empty cart error
+//   if (cartItems != null) {
+//     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+//     document.querySelector(".product-list").innerHTML = htmlItems.join("");
+//   }
   
-}
-function cartItemTemplate(item) {
-  const newItem = `<li class='cart-card divider'>
-  <a href='#' class='cart-card__image'>
-    <img
-      src='${item.Image}'
-      alt='${item.Name}'
-    />
-  </a>
-  <a href='#'>
-    <h2 class='card__name'>${item.Name}</h2>
-  </a>
-  <p class='cart-card__color'>${item.Colors[0].ColorName}</p>
-  <p class='cart-card__quantity'>qty: 1</p>
-  <p class='cart-card__price'>$${item.FinalPrice}</p>
-</li>`;
+// }
+// function cartItemTemplate(item) {
+//   const newItem = `<li class='cart-card divider'>
+//   <a href='#' class='cart-card__image'>
+//     <img
+//       src='${item.Image}'
+//       alt='${item.Name}'
+//     />
+//   </a>
+//   <a href='#'>
+//     <h2 class='card__name'>${item.Name}</h2>
+//   </a>
+//   <p class='cart-card__color'>${item.Colors[0].ColorName}</p>
+//   <p class='cart-card__quantity'>qty: 1</p>
+//   <p class='cart-card__price'>$${item.FinalPrice}</p>
+// </li>`;
 
-  return newItem;
-}
+//   return newItem;
+// }
 
-renderCartContents();
+// renderCartContents();
 
-function renderTotal(){
-  const products = getLocalStorage('so-cart')
-  if(!products) return;
-  let sum = 0;
-  let total_holder = document.querySelector(".hide");
+// function renderTotal(){
+//   const products = getLocalStorage('so-cart')
+//   if(!products) return;
+//   let sum = 0;
+//   let total_holder = document.querySelector(".hide");
   
-  for(const obj of products)
-  {
-    obj.FinalPrice ? sum += obj.FinalPrice : sum+=0;
-  }
+//   for(const obj of products)
+//   {
+//     obj.FinalPrice ? sum += obj.FinalPrice : sum+=0;
+//   }
   
-  total_holder.style.display = "block";
-  total_holder.textContent = `Total: $${sum}`;
-}
+//   total_holder.style.display = "block";
+//   total_holder.textContent = `Total: $${sum}`;
+// }
 
-renderCartContents();
-renderTotal();
-loadHeaderFooter()
+// renderCartContents();
+// renderTotal();
+// loadHeaderFooter()
+

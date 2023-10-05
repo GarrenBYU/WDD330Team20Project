@@ -1,9 +1,10 @@
 import {renderListWithTemplate} from "./utils.mjs";
 function productCardTemplate(product) {
-    return `<li class="product-card">
-            <a href="product_pages/?product=${product.Id}">
+    return `
+            <li class="product-card">
+            <a href="/product_pages/?category=${product.Category}&product=${product.Id}">
               <img
-                src="${product.Image}"
+                src="${product.Images.PrimaryLarge}"
                 alt="${product.Name}"
               />
               <h3 class="card__brand">${product.Brand.Name}</h3>
@@ -20,10 +21,10 @@ export default class ProductListing {
   }
 
   renderList(list) {
-    getOnlyWithImage(list) // We are going to fetch everything we need first
-    .then((filteredTents) => {
-      renderListWithTemplate(productCardTemplate, this.target, filteredTents)
-    });
+    // getOnlyWithImage(list) // We are going to fetch everything we need first
+    // .then((filteredTents) => {
+      renderListWithTemplate(productCardTemplate, this.target, list)
+    // });
     //console.log(actual_list);
     //renderListWithTemplate(productCardTemplate, this.target, filteredTents)
     // const products = list.map((item) => productCardTemplate(item));
@@ -32,55 +33,29 @@ export default class ProductListing {
   }
 
   async init() {
-    const list = await this.dataSource.getData();
+    const list = await this.dataSource.getData(this.category);
     this.renderList(list)
   }
 >>>>>>>>> Temporary merge branch 2
 }
 
-export default class ProductList {
-    constructor(category, dataSource, listElement){
-        this.category = category;
-        this.dataSource = dataSource;
-        this.listElement = listElement;
-    }
+// async function getOnlyWithImage(list) {
+//   console.log(list);
+//   let real_existing_products = [];
 
-    async init() {
-        const list = await this.dataSource.getData();
+//   async function checkFile(item) {
+//     try {
+//       const response = await fetch(item.Image); // Wait till fetch image from recourse item.Image
+//       if (response.ok) { // We have it? Responce 200?
+//         real_existing_products.push(item); // Good! Push it!
+//       } else { // No?
+//         console.error('Ooops! No such file in your project: ', item.Image); // Skip it!
+//       }
+//     } catch (error) {
+//       console.error('An error occured when checking file: ', error); 
+//     }
+//   }
 
-        this.renderList(list);
-    }
-
-    renderList(list){
-        getOnlyOnesWithImages(list).then((fileteredTents) => {
-            renderListWithTemplate(productCardTemplate, this.listElement, fileteredTents);
-        })
-        
-        // const htmlStrings = list.map(productCardTemplate);
-        // if (clear) {
-        //     parentElement.innerHTML = '';
-        // }
-        // this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
-        //renderListWithTemplate(productCardTemplate, this.listElement, list);
-    }
-}
-
-async function getOnlyOnesWithImages(list) {
-    let realProducts = [];
-
-    async function checkFile(item) {
-        try{
-            const response = await fetch(item.Image);
-            if (response.ok) {
-                realProducts.push(item);
-            } else {
-                console.error('There is no such file: ', error);
-            }
-        }
-        catch(error) {
-            console.error('There has been an error when looking for the file ', error);
-        }
-    }
-    await Promise.all(list.map((item) => checkFile(item)));
-    return realProducts;
-}
+  // await Promise.all(list.map((item) => checkFile(item)));  // Checking each tent image and waiting for all of them had been checked
+  // return real_existing_products;
+// }
