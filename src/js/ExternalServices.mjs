@@ -21,4 +21,8 @@ export default class ExternalServices {
     const products = await this.getData();
     return products.find((item) => item.Id === id);
   }
+
+  checkout(order) {
+
+  }
 }

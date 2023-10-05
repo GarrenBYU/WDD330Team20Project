@@ -7,5 +7,8 @@ const subtotal = shoppingCart.renderTotal(); // I think it needs to be refactore
 const checkoutProcess = new CheckoutProcess("so-cart", ".cart-total", subtotal);
 checkoutProcess.init();
 
+
+const form = document.querySelector("form");
+form.addEventListener("submit", (event) => checkoutProcess.checkout(event, form));
 // MODULE DONE!!!
 

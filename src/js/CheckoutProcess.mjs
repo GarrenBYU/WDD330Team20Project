@@ -48,4 +48,59 @@ export default class CheckoutProcess {
       document.querySelector(".tax").textContent += this.tax.toFixed(2);
       document.querySelector(".order-total").textContent += this.orderTotal.toFixed(2);
     }
+
+    async checkout(event, form) {
+      event.preventDefault();
+      const formData = new FormData(form),
+      dataJSON = {
+        orderTotal: "298.18",
+        shipping: 12,
+        tax: "16.20"
+      },
+      orderDate = new Date;
+
+      const simplifiedData = packageItems(this.list);
+
+      formData.append('orderDate', orderDate);
+      formData.append('items', JSON.stringify(simplifiedData));
+      formData.append('orderTotal', this.orderTotal);
+      formData.append('shipping', this.shipping);
+      formData.append('tax', this.tax);
+
+      const keysIterator = formData.values();
+      for (const key of keysIterator) {
+        console.log(key);
+}
+
+      // call the checkout method in our ExternalServices module and send it our data object.
+    }
   }
+
+
+  // takes the items currently stored in the cart (localstorage) and returns them in a simplified form.
+function packageItems(cartItems) {
+  if (!cartItems || !Array.isArray(cartItems)) {
+    return []; 
+  }
+
+  function simplifyCartItem(item) {
+    return {
+      id: item.Id,
+      name: item.Name,
+      price: item.FinalPrice,
+      quantity: 1
+    };
+  }
+
+  const simplifiedCart = cartItems.map(simplifyCartItem);
+  console.log(simplifiedCart );
+  return simplifiedCart;
+}
+
+
+function dataToJSON(form) {
+  form.forEach(function (val, key){
+    JSON[key] = val;
+  });
+  return JSON;
+}
