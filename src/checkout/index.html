@@ -8,7 +8,8 @@
 
     <title>Sleep Outside | Checkout</title>
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/checkout.js" type="module"></script>
   </head>
 
   <body>
@@ -22,8 +23,8 @@
       </section>
       <form name="checkout" action="get">
         <div class="name">
-          <label for="lastName">First Name:</label>
-          <input type="text" id="lastName" name="lastName" required>
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" required>
           <label for="lastName">Last Name:</label>
           <input type="text" id="lastName" name="lastName" required>
         </div>
@@ -46,6 +47,11 @@
           <input type="text" id="secutityCode" name="secutityCode" required>
         </div>
         <button type="submit">Checkout</button>
+        <div class="cart-footer hide"><p class="cart-total">Total: $</p></div>
+        <div class="cart-footer hide"><p class="shipping-estimate">Shipping Estimate: $</p></div>
+        <div class="cart-footer hide"><p class="tax">Tax: $</p></div>
+        <div class="cart-footer hide"><p class="order-total">Order Total: $</p></div>
+
       </form>
     </main>
 

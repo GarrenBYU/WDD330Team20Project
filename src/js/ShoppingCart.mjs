@@ -50,14 +50,21 @@ renderTotal(){
   const products = getLocalStorage(this.key)
   if(!products) return;
   let sum = 0;
-  let total_holder = document.querySelector(".hide");
+  let total_holder = document.querySelectorAll(".hide");
   
   for(const obj of products)
   {
     obj.FinalPrice ? sum += obj.FinalPrice : sum+=0;
   }
-  total_holder.style.display = "block";
+  //total_holder.style.display = "block";
+  //total_holder.map((element) => element.style.display = "block");
+  for(const element of total_holder)
+  {
+    element.style.display = "block"
+  }
+  //console.log(total_holder);
   total_holder.textContent = `Total: $${sum.toFixed(2)}`;
+  return sum.toFixed(2);
 }
 }
 
