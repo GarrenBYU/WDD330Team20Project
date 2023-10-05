@@ -1,4 +1,3 @@
-import ShoppingCard from "./ShoppingCart.mjs";
 import { getLocalStorage } from "./utils.mjs";
 
 

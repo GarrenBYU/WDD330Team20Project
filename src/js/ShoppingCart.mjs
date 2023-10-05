@@ -78,7 +78,7 @@ function removeCard(btn) {
   const indexToDelete = items.findIndex(item => item.Id === btn.id); // We need an index to correctly delete an item
   if (indexToDelete !== -1) {
     items.splice(indexToDelete, 1);
-    localStorage.setItem('so-cart', JSON.stringify(items)); // resfreshing the local storage
+    localStorage.setItem('so-cart', JSON.stringify(items)); // refreshing the local storage
   }
 
   console.log(localStorage);
