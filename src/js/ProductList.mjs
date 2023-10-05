@@ -36,7 +36,6 @@ export default class ProductListing {
     const list = await this.dataSource.getData(this.category);
     this.renderList(list)
   }
->>>>>>>>> Temporary merge branch 2
 }
 
 // async function getOnlyWithImage(list) {
