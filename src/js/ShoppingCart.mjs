@@ -48,16 +48,24 @@ renderBasket(){
 
 renderTotal(){
   const products = getLocalStorage(this.key)
-  if(!products) return;
+  if(products.length == 0) return;
   let sum = 0;
-  let total_holder = document.querySelector(".hide");
-  
+  let total_holder = document.querySelectorAll(".hide");
+  let shoppingCard_holder = document.querySelector(".hide");
+
   for(const obj of products)
   {
     obj.FinalPrice ? sum += obj.FinalPrice : sum+=0;
   }
-  total_holder.style.display = "block";
-  total_holder.textContent = `Total: $${sum.toFixed(2)}`;
+  //total_holder.style.display = "block";
+  //total_holder.map((element) => element.style.display = "block");
+  for(const element of total_holder)
+  {
+    element.style.display = "block"
+  }
+  //console.log(total_holder);
+  shoppingCard_holder.textContent = `Total: $${sum.toFixed(2)}`;
+  return sum.toFixed(2);
 }
 }
 
@@ -70,7 +78,7 @@ function removeCard(btn) {
   const indexToDelete = items.findIndex(item => item.Id === btn.id); // We need an index to correctly delete an item
   if (indexToDelete !== -1) {
     items.splice(indexToDelete, 1);
-    localStorage.setItem('so-cart', JSON.stringify(items)); // resfreshing the local storage
+    localStorage.setItem('so-cart', JSON.stringify(items)); // refreshing the local storage
   }
 
   console.log(localStorage);

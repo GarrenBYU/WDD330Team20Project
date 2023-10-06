@@ -1,13 +1,13 @@
 import { getLocalStorage, setLocalStorage, getParam } from "./utils.mjs";
 import ProductDetails from './ProductDetails.mjs';
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 
 // Variables
 
 
 const productId = getParam('product');
 const category = getParam('category');
-const dataSource = new ProductData(category);
+const dataSource = new ExternalServices(category);
 //console.log(await dataSource.findProductById(productId));
 console.log(productId)
 const product = new ProductDetails(productId, dataSource);
