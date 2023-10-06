@@ -32,7 +32,8 @@ export default class ExternalServices {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(order)
+      body: JSON.stringify(order),
+      
     }
 
     const response = await fetch(checkoutServerURL, options);
