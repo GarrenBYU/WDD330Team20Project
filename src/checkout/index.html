@@ -9,6 +9,7 @@
     <title>Sleep Outside | Checkout</title>
 
     <link rel="stylesheet" href="../css/style.css" />
+    <script src="../js/main.js" type="module"></script>
     <script src="../js/checkout.js" type="module"></script>
   </head>
 
@@ -46,7 +47,7 @@
           <label for="cardNumber">Credit Card Number:</label>
           <input type="number" id="cardNumber" name="cardNumber" value="1234123412341234"  required>
           <label for="expiration">Expiration Date:</label>
-          <input type="date" id="expiration" name="expiration" required>
+          <input type="text" id="expiration" name="expiration" placeholder="mm/yy" required>
           <label for="code">Security Code:</label>
           <input type="text" id="code" name="code" value="123" required>
           <button type="submit">Checkout</button>

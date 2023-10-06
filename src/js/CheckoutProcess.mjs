@@ -1,6 +1,7 @@
 import { getLocalStorage } from "./utils.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 
-
+const externalServices = new ExternalServices()
 export default class CheckoutProcess {
     constructor(key, outputSelector, subtotal) {
       this.key = key;
@@ -52,27 +53,35 @@ export default class CheckoutProcess {
     async checkout(event, form) {
       event.preventDefault();
       const formData = new FormData(form),
-      dataJSON = {
-        orderTotal: "298.18",
-        shipping: 12,
-        tax: "16.20"
-      },
-      orderDate = new Date;
-
+      // dataJSON = {
+      //   orderTotal: "298.18",
+      //   shipping: 12,
+      //   tax: "16.20"
+      // },
+      convertedJSON = {}
+      let orderDate = new Date;
+      formData.forEach(function (value, key) {
+        convertedJSON[key] = value;
+      });
+     
+  
       const simplifiedData = packageItems(this.list);
+      convertedJSON["orderDate"] = orderDate
+      convertedJSON["items"] = simplifiedData
+      externalServices.checkout(convertedJSON)
+      // formData.append('orderDate', orderDate);
+      // formData.append('items', JSON.stringify(simplifiedData));
+      // formData.append('orderTotal', this.orderTotal);
+      // formData.append('shipping', this.shipping);
+      // formData.append('tax', this.tax);
 
-      formData.append('orderDate', orderDate);
-      formData.append('items', JSON.stringify(simplifiedData));
-      formData.append('orderTotal', this.orderTotal);
-      formData.append('shipping', this.shipping);
-      formData.append('tax', this.tax);
-
-      const keysIterator = formData.values();
-      for (const key of keysIterator) {
-        console.log(key);
-}
+      // const keysIterator = formData.values();
+      // for (const key of keysIterator) {
+      //   console.log(key);
+      // } 
 
       // call the checkout method in our ExternalServices module and send it our data object.
+    
     }
   }
 
@@ -93,14 +102,8 @@ function packageItems(cartItems) {
   }
 
   const simplifiedCart = cartItems.map(simplifyCartItem);
-  console.log(simplifiedCart );
+
   return simplifiedCart;
 }
 
 
-function dataToJSON(form) {
-  form.forEach(function (val, key){
-    JSON[key] = val;
-  });
-  return JSON;
-}
