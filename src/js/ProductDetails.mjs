@@ -1,4 +1,4 @@
-import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, renderWithTemplate } from "./utils.mjs";
 
 function productDetailsTemplate(product) {
   let discount =   ((product.SuggestedRetailPrice - product.FinalPrice)/product.SuggestedRetailPrice ) * 100
@@ -44,6 +44,7 @@ export default class ProductDetails {
     } else {
       setLocalStorage("so-cart", [this.product]);
     }
+    renderWithTemplate();
   }
 
 

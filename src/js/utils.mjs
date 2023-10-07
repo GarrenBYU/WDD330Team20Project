@@ -50,10 +50,13 @@ export async function renderListWithTemplate(templateFn, parentElement, list, po
 
 export function renderWithTemplate(templateFn, parentElement, data, callback){
 
-  parentElement.appendChild(templateFn);
+  if(templateFn) parentElement.appendChild(templateFn);
   if (callback) {
     callback(data);
   }
+  const products = getLocalStorage('so-cart');
+  let superNumber = document.getElementById('amount'); // Here we are going to set amount of items in a bag
+  superNumber.textContent = products.length;
   
 }
 export async function loadTemplate(path) {
@@ -70,10 +73,15 @@ export async function loadHeaderFooter() {
 
   let templateHeaderHTML = await loadTemplate('../partials/header.html');
   let templateFooterHTML =  await loadTemplate('../partials/footer.html');
-  console.log(templateHeaderHTML)
+
   renderWithTemplate(templateHeaderHTML, headerElement);
   renderWithTemplate(templateFooterHTML, footerElement);
 
+}
 
-
+export async function loadSuperNumber() {
+  document.addEventListener("DOMContentLoaded", function() {
+    let superNumber = document.getElementById('amount');
+    //superNumber.textContent = 5;
+  });
 }

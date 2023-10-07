@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, renderWithTemplate } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
 function cartItemTemplate(item) {
@@ -80,7 +80,7 @@ function removeCard(btn) {
     items.splice(indexToDelete, 1);
     localStorage.setItem('so-cart', JSON.stringify(items)); // refreshing the local storage
   }
-
+  renderWithTemplate();
   console.log(localStorage);
   console.log(getLocalStorage('so-cart'));
 
