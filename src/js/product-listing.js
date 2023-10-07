@@ -7,5 +7,7 @@ const category = getParam('category');
 const product = new ExternalServices(category);
 const listing = new ProductList(product.category, product, element);
 
-
+document.querySelector("#close-modal").addEventListener("click", ()=> {
+    document.querySelector("#modal-container").style.display = "none"
+})
 listing.init();

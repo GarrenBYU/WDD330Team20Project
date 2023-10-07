@@ -1,4 +1,29 @@
+import ExternalServices from "./ExternalServices.mjs";
+import ProductDetails from "./ProductDetails.mjs";
 import {renderListWithTemplate} from "./utils.mjs";
+
+
+
+function productModalTemplate(product) {
+  let discount =   ((product.SuggestedRetailPrice - product.FinalPrice)/product.SuggestedRetailPrice ) * 100
+  return `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
+    <h2 class="divider">${product.NameWithoutBrand}</h2>
+    <img
+      class="divider"
+      src="${product.Images.PrimaryExtraLarge}"
+      alt="${product.NameWithoutBrand}"
+    />
+    <p class="product-card__price">$${product.FinalPrice} - <s>$${product.SuggestedRetailPrice}</s> <strong class="discount">${discount.toFixed()}%</strong> off!</p>
+    <p class="product__color">${product.Colors[0].ColorName}</p>
+    <p class="product__description">
+    ${product.DescriptionHtmlSimple}
+    </p>
+    <div class="product-detail__add">
+      <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
+    </div></section>`;
+}
+
+
 function productCardTemplate(product) {
     return `
             <li class="product-card">
@@ -11,6 +36,7 @@ function productCardTemplate(product) {
               <h2 class="card__name">${product.Name}</h2>
               <p class="product-card__price">$${product.ListPrice}</p></a
             >
+            <button class="quick_view" product-id="${product.Id}">Quick view</button>
           </li>`
 }
 export default class ProductListing {
@@ -34,7 +60,20 @@ export default class ProductListing {
 
   async init() {
     const list = await this.dataSource.getData(this.category);
-    this.renderList(list)
+    await this.renderList(list)
+    const dataSource = new ExternalServices(this.category)
+    
+    console.log(dataSource)
+    document.querySelectorAll(".quick_view").forEach(element => element.addEventListener("click", async ()=> {
+      let productId =  element.getAttribute('product-id')
+     console.log(productId)
+      let product = new ProductDetails(productId, dataSource, "#modal-content")
+      product.init()
+      // let productItem = await product.findProductById(productId)
+      // console.log(productItem)
+      document.querySelector("#modal-container").style.display = "block"
+      // document.querySelector("#modal-content").innerHTML += productModalTemplate(productItem)
+    }))
   }
 }
 
