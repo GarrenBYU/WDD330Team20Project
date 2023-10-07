@@ -224,6 +224,7 @@ button {
 }
 #checkoutMain {
   display: flex;
+  flex-direction: column-reverse;
   gap: 40px;
 }
 #checkoutMain button {
@@ -233,12 +234,12 @@ fieldset {
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-  width: fit-content;
+  
   margin-top: 40px;
   padding: 0px 30px 30px 30px;
 }
 input{
-  width: 400px;
+
   padding: 10px;
 }
 label {
@@ -249,6 +250,7 @@ label {
   height: fit-content;
   margin-top: 100px;
   padding: 30px;
+
 }
 @media screen and (min-width: 500px) {
   body {
@@ -262,9 +264,16 @@ label {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
   }
+  #checkoutMain {
+    flex-wrap: wrap-reverse;
+    flex-direction: row;
+    align-items: flex-end;
+    
+  }
 }
 
 footer {
   font-size: var(--small-font);
   padding: 1em;
+
 }
