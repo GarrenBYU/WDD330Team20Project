@@ -1,6 +1,6 @@
 const baseURL = import.meta.env.VITE_SERVER_URL
 const checkoutServerURL = import.meta.env.VITE_CHECKOUT_SERVER_URL;
-
+// test for redeployment
 console.log(checkoutServerURL)
 function convertToJson(res) {
   if (res.ok) {
