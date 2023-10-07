@@ -1,5 +1,6 @@
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
 
+
 function productDetailsTemplate(product) {
   let discount =   ((product.SuggestedRetailPrice - product.FinalPrice)/product.SuggestedRetailPrice ) * 100
   return `<section class="product-detail"> <h3>${product.Brand.Name}</h3>
@@ -20,10 +21,11 @@ function productDetailsTemplate(product) {
 }
 
 export default class ProductDetails {
-  constructor(productId, dataSource) {
+  constructor(productId, dataSource, target) {
     this.productId = productId;
     this.product = {};
     this.dataSource = dataSource;
+    this.target = target;
   }
   getData() {
     return fetch(this.path)
@@ -32,7 +34,10 @@ export default class ProductDetails {
   }
   async findProductById(id) {
     const response = await fetch(baseURL + `/products/search/${id}`);
+    console.log("hello")
+
     const data = await convertToJson(response);
+    console.log(data.Result)
     return data.Result
   }
 
@@ -47,11 +52,11 @@ export default class ProductDetails {
   }
 
 
-  renderProductDetails(product) {
-    const element = document.querySelector("main");
+  renderProductDetails(target) {
+    const element = document.querySelector(target);
     
-    element.insertAdjacentHTML("afterBegin", productDetailsTemplate(this.product));
-    console.log(element);
+    element.innerHTML = productDetailsTemplate(this.product);
+
     
   }
 
@@ -59,8 +64,8 @@ export default class ProductDetails {
     // use our datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it
     this.product = await this.dataSource.findProductById(this.productId);
     // once we have the product details we can render out the HTML
-
-    this.renderProductDetails("main");
+    console.log(this.target)
+    this.renderProductDetails(this.target);
     //this.renderProductDetails(this.product);
     // once the HTML is rendered we can add a listener to Add to Cart button
     // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
@@ -85,11 +90,5 @@ export default class ProductDetails {
   //   const products = await this.getData();
   //   return products.find((item) => item.Id === id);
   // }
-  renderProductDetails(selector) {
-    const element = document.querySelector(selector);
-    
-    element.insertAdjacentHTML("afterBegin", productDetailsTemplate(this.product));
-    //console.log(element);
-    
-  }
+
 }

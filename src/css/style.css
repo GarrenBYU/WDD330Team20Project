@@ -252,6 +252,20 @@ label {
   padding: 30px;
 
 }
+#modal-container {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+
+  max-width: 400px;
+  top: 50%;
+  left: 50%;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  transform: translate(-50%, -50%);
+}
+#modal-container img {
+  width: 100px;
+}
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

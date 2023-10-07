@@ -9,8 +9,8 @@ const productId = getParam('product');
 const category = getParam('category');
 const dataSource = new ExternalServices(category);
 //console.log(await dataSource.findProductById(productId));
-console.log(productId)
-const product = new ProductDetails(productId, dataSource);
+console.log(dataSource)
+const product = new ProductDetails(productId, dataSource, "main");
 product.init();
 
 
