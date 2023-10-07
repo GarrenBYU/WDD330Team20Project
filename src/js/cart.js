@@ -1,11 +1,13 @@
 import { getLocalStorage } from "./utils.mjs";
-import { loadHeaderFooter } from "./utils.mjs";
+import { loadHeaderFooter, loadSuperNumber } from "./utils.mjs";
 import ShoppingCart from "./ShoppingCart.mjs";
 
 loadHeaderFooter();
+
 const shoppingCart = new ShoppingCart('so-cart', '.product-list');
 shoppingCart.renderBasket();
 shoppingCart.renderTotal();
+loadSuperNumber();
 
 // function renderCartContents() {
 //   const cartItems = getLocalStorage("so-cart");
