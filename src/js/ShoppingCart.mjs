@@ -48,10 +48,12 @@ renderBasket(){
 
 renderTotal(){
   const products = getLocalStorage(this.key)
-  if(products.length == 0) return;
   let sum = 0;
   let total_holder = document.querySelectorAll(".hide");
   let shoppingCard_holder = document.querySelector(".hide");
+
+  if(products.length == 0) shoppingCard_holder.textContent = `Total: $${sum.toFixed(2)}`;
+  if(products.length == 0) return;
 
   for(const obj of products)
   {
