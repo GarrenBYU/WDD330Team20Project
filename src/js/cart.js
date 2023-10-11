@@ -8,6 +8,12 @@ const shoppingCart = new ShoppingCart('so-cart', '.product-list');
 shoppingCart.renderBasket();
 shoppingCart.renderTotal();
 
+document.querySelector('#checkoutSubmit')
+.addEventListener('submit', (e) => {
+  e.preventDefault();
+  myCheckout.checkout();
+});
+
 
 // function renderCartContents() {
 //   const cartItems = getLocalStorage("so-cart");

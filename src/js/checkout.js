@@ -12,3 +12,11 @@ const form = document.querySelector("form");
 form.addEventListener("submit", (event) => checkoutProcess.checkout(event, form));
 // MODULE DONE!!!
 
+document.querySelector('#checkoutSubmit').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const myForm = document.forms[0];
+  const chk_status = myForm.checkValidity();
+  myForm.reportValidity();
+  if(chk_status)
+    myCheckout.checkout();
+  });
