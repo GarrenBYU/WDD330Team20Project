@@ -2,11 +2,12 @@ const baseURL = import.meta.env.VITE_SERVER_URL
 const checkoutServerURL = import.meta.env.VITE_CHECKOUT_SERVER_URL;
 // test for redeployment
 console.log(checkoutServerURL)
-function convertToJson(res) {
+async function convertToJson(res) {
+  const response = await res.json();
   if (res.ok) {
-    return res.json();
+    return response;
   } else {
-    throw new Error("Bad Response");
+    throw { name: 'servicesError', message: response };
   }
 }
 
@@ -36,11 +37,13 @@ export default class ExternalServices {
       
     }
 
-    const response = await fetch(checkoutServerURL, options);
-    if(response.ok) {
-      console.log(response) 
-    } else {
-      console.group("error")
-    }
+    //const response = await fetch(checkoutServerURL, options);
+    return await fetch(checkoutServerURL, options).then(convertToJson);
+   // return await fetch(baseURL + "checkout/", options).then(convertToJson);
+    // if(response.ok) {
+    //   console.log(response) 
+    // } else {
+    //   console.group("error")
+    // }
   }
 }

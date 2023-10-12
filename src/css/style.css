@@ -241,9 +241,9 @@ button {
   flex-direction: column-reverse;
   gap: 40px;
 }
-#checkoutMain button {
+/* #checkoutMain button {
   margin-top: 40px;
-}
+} */
 fieldset {
   display: flex;
   flex-direction: column;
@@ -304,4 +304,25 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 
+}
+
+.alert {
+  display: flex;
+  background-color: orangered;
+  gap: 20%;
+  align-items: center;
+  justify-content: space-around;
+  width: 250px;
+  margin: 0px auto 0px auto;
+  position: sticky;
+}
+
+  #alert_btn {
+  background:none;
+  width: 20px;
+  height: 20px;
+  /* margin: auto 0px auto; */
+  padding: 0px;
+  color: #303030;
+  margin-right: 0px;
 }

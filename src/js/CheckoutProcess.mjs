@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, alertMessage, removeAllAlerts, setLocalStorage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 const externalServices = new ExternalServices()
@@ -53,12 +53,8 @@ export default class CheckoutProcess {
     async checkout(event, form) {
       event.preventDefault();
       const formData = new FormData(form),
-      // dataJSON = {
-      //   orderTotal: "298.18",
-      //   shipping: 12,
-      //   tax: "16.20"
-      // },
       convertedJSON = {}
+
       let orderDate = new Date;
       formData.forEach(function (value, key) {
         convertedJSON[key] = value;
@@ -68,19 +64,33 @@ export default class CheckoutProcess {
       const simplifiedData = packageItems(this.list);
       convertedJSON["orderDate"] = orderDate
       convertedJSON["items"] = simplifiedData
-      externalServices.checkout(convertedJSON)
-      // formData.append('orderDate', orderDate);
-      // formData.append('items', JSON.stringify(simplifiedData));
-      // formData.append('orderTotal', this.orderTotal);
-      // formData.append('shipping', this.shipping);
-      // formData.append('tax', this.tax);
+      try {
+        const res = await externalServices.checkout(convertedJSON);
+        console.log(res);
+        setLocalStorage("so-cart", []);
+        location.assign("/checkout/success.html");
+      } catch (err) {
+        // get rid of any preexisting alerts.
+        removeAllAlerts();
+        for (let message in err.message) {
+          alertMessage(err.message[message]);
+        }
+      }
 
-      // const keysIterator = formData.values();
-      // for (const key of keysIterator) {
-      //   console.log(key);
+      // try {
+      //   const checkoutForm = document.forms[0];
+      //   const check_status = checkoutForm.checkValidity();
+      //   checkoutForm.reportValidity();
+      //   externalServices.checkout(convertedJSON)
+            
+      //   if(check_status) {
+      //     window.location.href = "success.html";
+      //     localStorage.clear();
+      //   }
       // } 
+      // catch(error) {
 
-      // call the checkout method in our ExternalServices module and send it our data object.
+      // }
     
     }
   }

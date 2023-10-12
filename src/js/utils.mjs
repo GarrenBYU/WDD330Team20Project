@@ -85,3 +85,38 @@ export async function loadSuperNumber() {
     //superNumber.textContent = 5;
   });
 }
+
+export function alertMessage(message, scroll=true) {
+  const alert = document.createElement('div');
+  alert.classList.add('alert');
+  const error_message = document.createElement('p');
+  error_message.textContent = message
+
+  const close_btn = document.createElement('button');
+  close_btn.setAttribute('id', 'alert_btn');
+  //close_btn.classList.add('alert_btn');
+  close_btn.textContent = 'X';
+
+  alert.appendChild(error_message);
+  alert.appendChild(close_btn);
+
+  alert.addEventListener('click', function(e) {
+    console.log(e.target.tagName);
+    if(e.target.tagName == 'BUTTON') { 
+      main.removeChild(this);
+    }
+  });
+
+  const main = document.querySelector('main');
+  main.prepend(alert);
+
+  if(scroll) window.scrollTo(0,0);
+
+}
+
+export function removeAllAlerts() {
+  let alerts = document.querySelectorAll('.alert');
+  alerts.forEach(element => {
+    element.remove();
+  });
+}
